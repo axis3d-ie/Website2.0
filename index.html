@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AXIS3D // PRECISION ENGINEERING</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Lenis for Smooth Scrolling -->
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        'axis-charcoal': '#1E2029', // YOUR ACCENT GREY
+                        'axis-white': '#F5F5F7',
+                        'axis-orange': '#FF4D00', 
+                        'axis-light-grey': '#E0E0E0',
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #e5e5e5 1px, transparent 1px), linear-gradient(to bottom, #e5e5e5 1px, transparent 1px)",
+                    },
+                    screens: {
+                        'xs': '375px', // Small mobile fix
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #F5F5F7;
+            color: #1E2029;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            cursor: crosshair; /* Technical feel */
+        }
+
+        /* Responsive Typography Clamps */
+        .h1-responsive { font-size: clamp(3rem, 10vw, 8rem); }
+        .h2-responsive { font-size: clamp(2rem, 5vw, 4rem); }
+
+        /* Utilitarian Grid Background */
+        .bg-tech-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px);
+        }
+
+        /* Marquee Animation */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+        }
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #F5F5F7; }
+        ::-webkit-scrollbar-thumb { background: #1E2029; }
+        ::-webkit-scrollbar-thumb:hover { background: #FF4D00; }
+
+        /* Loader */
+        #loader {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #1E2029;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body class="bg-tech-grid selection:bg-axis-orange selection:text-white">
+
+    <!-- Loading Screen -->
+    <div id="loader">
+        <div class="font-mono text-4xl md:text-6xl font-bold text-white mb-4">AXIS_3D</div>
+        <div class="font-mono text-xs md:text-sm text-axis-orange">SYSTEM INITIALIZING...</div>
+        <div class="w-48 h-0.5 bg-gray-700 mt-4 overflow-hidden relative">
+            <div class="absolute h-full bg-axis-orange w-0 animate-[loading_1.5s_ease-in-out_forwards]" style="animation-fill-mode: forwards; animation-name: loadBar;"></div>
+        </div>
+    </div>
+    <style>@keyframes loadBar { to { width: 100%; } }</style>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-start p-4 pointer-events-none mix-blend-difference text-white">
+        <div class="pointer-events-auto">
+            <h1 class="font-bold text-2xl tracking-tighter">AXIS<span class="text-axis-orange">3D</span>.TECH</h1>
+            <div class="font-mono text-[10px] opacity-70">
+                LAT: 53.3498 N<br>
+                LON: 6.2603 W
+            </div>
+        </div>
+
+        <div class="pointer-events-auto flex flex-col items-end gap-1">
+            <!-- Portal Button (New) -->
+            <a href="#portal-link-goes-here" class="hidden md:flex items-center gap-2 bg-white border border-axis-charcoal text-axis-charcoal px-4 py-2 hover:bg-axis-charcoal hover:text-white transition-colors group">
+                <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                <span class="font-mono text-xs font-bold tracking-wider">CLIENT_PORTAL</span>
+            </a>
+
+            <!-- Mobile Portal Icon -->
+             <a href="#portal-link-goes-here" class="md:hidden flex items-center justify-center w-10 h-10 bg-white border border-axis-charcoal text-axis-charcoal">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                </svg>
+            </a>
+            <button onclick="document.getElementById('contact-section').scrollIntoView({behavior: 'smooth'})" class="bg-white text-black font-mono text-xs px-4 py-2 hover:bg-axis-orange transition-colors border border-transparent uppercase font-bold">
+                [ Request Quote ]
+            </button>
+            <div class="font-mono text-[10px] text-right mt-2">
+                SYS.STATUS: ONLINE<br>
+                V.2.0.24
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen w-full overflow-hidden flex flex-col justify-center items-center border-b border-black">
+        <!-- 3D Canvas Container -->
+        <div id="canvas-container" class="absolute inset-0 z-0 opacity-80"></div>
+
+        <div class="relative z-10 text-center pointer-events-none mix-blend-exclusion text-white">
+            <div class="font-mono text-xs md:text-sm tracking-[0.5em] mb-4">PRECISION SCANNING & ENGINEERING</div>
+            <h2 class="text-[12vw] leading-[0.8] font-black tracking-tighter">
+                DIGITAL<br>
+                <span class="text-stroke text-transparent" style="-webkit-text-stroke: 2px white;">REALITY</span>
+            </h2>
+        </div>
+
+        <div class="absolute bottom-0 left-0 w-full border-t border-black bg-axis-orange text-black py-2 overflow-hidden z-20">
+            <div class="marquee-container font-mono font-bold text-lg">
+                <div class="marquee-content">
+                    REVERSE ENGINEERING /// RAPID PROTOTYPING /// INDUSTRIAL METROLOGY /// CAD DESIGN /// ADDITIVE MANUFACTURING /// REVERSE ENGINEERING /// RAPID PROTOTYPING /// INDUSTRIAL METROLOGY /// CAD DESIGN /// ADDITIVE MANUFACTURING ///
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing / Materials Datasheet (New Section) -->
+    <section class="w-full py-16 md:py-24 px-4 md:px-12 bg-white border-b border-axis-charcoal relative">
+        <div class="absolute top-0 left-0 bg-axis-charcoal text-white text-[10px] font-mono px-3 py-1">DATA_SHEET_01 // PRICING</div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+            <!-- Left: Pitch -->
+            <div>
+                <h3 class="text-3xl md:text-5xl font-bold mb-6 text-axis-charcoal leading-tight">TRANSPARENT<br>UNIT ECONOMICS.</h3>
+                <p class="text-gray-600 mb-8 max-w-md">We specialize in robust, functional parts using industry-standard PLA and PETG. No hidden fees, just raw manufacturing costs.</p>
+
+                <div class="flex gap-4">
+                    <div class="flex items-center gap-2">
+                        <div class="w-3 h-3 bg-axis-orange rounded-full"></div>
+                        <span class="font-mono text-sm font-bold">FDM TECHNOLOGY</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-3 h-3 bg-axis-charcoal rounded-full"></div>
+                        <span class="font-mono text-sm font-bold">±0.2mm TOLERANCE</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Pricing Table -->
+            <div class="bg-axis-white border border-axis-charcoal p-1 shadow-[8px_8px_0px_0px_rgba(30,32,41,1)]">
+                <div class="border border-axis-charcoal/20 p-6 md:p-8">
+                    <div class="flex justify-between items-end mb-6 border-b border-axis-charcoal pb-2">
+                        <span class="font-mono text-xl font-bold">MATERIAL COSTS</span>
+                        <span class="font-mono text-xs text-gray-500">EUR / GRAM</span>
+                    </div>
+
+                    <div class="space-y-4 font-mono">
+                        <!-- Row 1 -->
+                        <div class="flex justify-between items-center group">
+                            <div>
+                                <div class="font-bold text-lg">PLA</div>
+                                <div class="text-xs text-gray-500">Standard Prototyping</div>
+                            </div>
+                            <div class="text-2xl font-bold">€0.09<span class="text-xs font-normal text-gray-500">/g</span></div>
+                        </div>
+                        <hr class="border-dashed border-gray-300">
+
+                        <!-- Row 2 -->
+                        <div class="flex justify-between items-center group">
+                            <div>
+                                <div class="font-bold text-lg">PETG</div>
+                                <div class="text-xs text-gray-500">Functional / Heat Resistant</div>
+                            </div>
+                            <div class="text-2xl font-bold">€0.12<span class="text-xs font-normal text-gray-500">/g</span></div>
+                        </div>
+                        <hr class="border-axis-charcoal border-2 my-4">
+
+                        <!-- Handling -->
+                        <div class="flex justify-between items-center bg-axis-charcoal text-white p-3">
+                            <div class="uppercase text-xs tracking-wider">Setup & Handling Fee</div>
+                            <div class="font-bold">€5.00 <span class="text-[10px] font-normal opacity-70">FLAT RATE</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Grid (Refined) -->
+    <section class="w-full border-b border-axis-charcoal bg-axis-white">
+        <div class="grid grid-cols-1 md:grid-cols-3">
+
+            <!-- Service 1 -->
+            <div class="border-b md:border-b-0 md:border-r border-axis-charcoal p-6 md:p-8 min-h-[300px] md:min-h-[400px] relative group hover:bg-axis-charcoal hover:text-white transition-colors duration-300">
+                <div class="font-mono text-xs border border-current px-1 inline-block mb-8 rounded">SVC_01</div>
+                <h3 class="text-2xl md:text-3xl font-bold uppercase mb-4">Rapid<br>Prototyping</h3>
+                <p class="font-mono text-xs md:text-sm opacity-80">Fast iteration using high-quality PLA. Verify form, fit, and function before mass manufacture.</p>
+                <div class="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity font-mono text-4xl font-black text-axis-orange">01</div>
+            </div>
+
+            <!-- Service 2 -->
+            <div class="border-b md:border-b-0 md:border-r border-axis-charcoal p-6 md:p-8 min-h-[300px] md:min-h-[400px] relative group hover:bg-axis-charcoal hover:text-white transition-colors duration-300">
+                <div class="font-mono text-xs border border-current px-1 inline-block mb-8 rounded">SVC_02</div>
+                <h3 class="text-2xl md:text-3xl font-bold uppercase mb-4">End-Use<br>Parts</h3>
+                <p class="font-mono text-xs md:text-sm opacity-80">Functional mechanical components printed in PETG for durability, chemical resistance, and minimal flexibility.</p>
+                <div class="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity font-mono text-4xl font-black text-axis-orange">02</div>
+            </div>
+
+            <!-- Service 3 -->
+            <div class="p-6 md:p-8 min-h-[300px] md:min-h-[400px] relative group hover:bg-axis-charcoal hover:text-white transition-colors duration-300">
+                <div class="font-mono text-xs border border-current px-1 inline-block mb-8 rounded">SVC_03</div>
+                <h3 class="text-2xl md:text-3xl font-bold uppercase mb-4">Reverse<br>Engineering</h3>
+                <p class="font-mono text-xs md:text-sm opacity-80">3D Scanning services to recreate broken parts or analyze legacy components for digital archiving.</p>
+                <div class="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity font-mono text-4xl font-black text-axis-orange">03</div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Visuals / Portfolio -->
+    <section class="w-full border-b border-axis-charcoal">
+        <div class="grid grid-cols-1 md:grid-cols-2">
+            <!-- Image 1: 3D Printed Part (Re-using placeholder image link) -->
+            <div class="relative h-[300px] md:h-[500px] border-b md:border-b-0 md:border-r border-axis-charcoal overflow-hidden group">
+                <img src="https://storage.googleapis.com/download/storage/v1/b/b50a2569-8051-4cc1-9c60-c3d5a417622d/o/generated%2Fimg-7g5t648u0g1x15c.png?alt=media" onerror="this.onerror=null; this.src='https://placehold.co/800x800/e0e0e0/1E2029?text=PLA+Part';" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter grayscale">
+                <div class="absolute inset-0 bg-axis-charcoal/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">
+                    <div class="border border-white p-4 text-white text-center">
+                        <h4 class="font-bold text-xl mb-1">NYLON GEAR REPLACEMENT</h4>
+                        <p class="font-mono text-xs text-axis-orange">SCANNED & PRINTED</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Image 2: Scan Data (Re-using placeholder image link) -->
+            <div class="relative h-[300px] md:h-[500px] overflow-hidden group">
+                <img src="https://storage.googleapis.com/download/storage/v1/b/b50a2569-8051-4cc1-9c60-c3d5a417622d/o/generated%2Fimg-6l2j5m2k7h0n98p.png?alt=media" onerror="this.onerror=null; this.src='https://placehold.co/800x800/1E2029/FF4D00?text=Scan+Data';" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                <div class="absolute top-4 left-4 bg-white px-2 py-1 font-mono text-xs border border-axis-charcoal">
+                    SCAN_DATA_VISUALIZATION
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact / Fillout Form Section -->
+    <section id="contact-section" class="w-full min-h-screen flex flex-col md:flex-row bg-axis-light-grey relative">
+
+        <!-- Left: Info -->
+        <div class="w-full md:w-1/3 p-6 md:p-12 border-b md:border-b-0 md:border-r border-axis-charcoal flex flex-col justify-between bg-white">
+            <div>
+                <h2 class="text-3xl md:text-5xl font-bold mb-6 md:mb-8 text-axis-charcoal">START<br>BUILDING</h2>
+                <div class="space-y-6 md:space-y-8 font-mono text-xs md:text-sm">
+                    <div>
+                        <p class="text-gray-500 mb-1">// EMAIL</p>
+                        <a href="mailto:info@axis3d.tech" class="hover:text-axis-orange font-bold text-lg">info@axis3d.tech</a>
+                    </div>
+                    <div>
+                        <p class="text-gray-500 mb-1">// PROTOCOL</p>
+                        <ul class="list-disc pl-4 space-y-1">
+                            <li>Upload STL / STEP files</li>
+                            <li>Specify Material (PLA/PETG)</li>
+                            <li>Receive Quote within 24h</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile visual filler -->
+            <div class="mt-8 hidden md:block">
+                <div class="w-full h-px bg-axis-charcoal mb-4"></div>
+                <div class="flex justify-between font-mono text-[10px] text-gray-500">
+                    <span>STATUS: ONLINE</span>
+                    <span>QUEUE: OPEN</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right: The Form Container -->
+        <div class="w-full md:w-2/3 p-2 md:p-12 bg-white relative">
+            <!-- Decorative Header -->
+            <div class="flex justify-between items-center mb-4 px-2 pt-4 md:pt-0">
+                <span class="font-mono text-[10px] md:text-xs bg-axis-charcoal text-white px-2 py-1">SECURE_INPUT</span>
+            </div>
+
+            <!-- FILLOUT.COM CONTAINER -->
+            <!-- PASTE YOUR FILLOUT EMBED CODE INSIDE THIS DIV -->
+            <div class="w-full h-[650px] md:h-[800px] bg-gray-50 border border-gray-200 flex items-center justify-center relative overflow-hidden rounded-sm shadow-inner">
+
+                <!-- Placeholder visuals (Remove this when adding iframe) -->
+                <div class="text-center opacity-40 pointer-events-none p-4">
+                    <div class="text-4xl md:text-6xl mb-4 font-mono font-bold text-axis-charcoal">FORM_BLOCK</div>
+                    <p class="font-mono text-xs md:text-sm text-axis-charcoal">[ Waiting for Fillout.com embed ]</p>
+                    <p class="font-mono text-xs mt-2 text-axis-orange">Paste iframe code in HTML line ~398</p>
+                </div>
+
+                <!-- Example: -->
+                <!-- <iframe src="https://fillout.com/..." class="w-full h-full border-0"></iframe> -->
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-axis-charcoal text-white border-t border-gray-800 pt-12 md:pt-16 pb-6">
+        <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12 mb-12">
+            <div class="col-span-1 md:col-span-2">
+                <h2 class="text-2xl font-bold mb-4">AXIS3D</h2>
+                <p class="font-mono text-xs text-gray-400 max-w-sm leading-relaxed">
+                    Dublin-based additive manufacturing and metrology. Precision FDM printing in PLA & PETG.
+                </p>
+            </div>
+            <div>
+                <h4 class="font-mono text-axis-orange text-xs mb-4 uppercase tracking-wider">Navigation</h4>
+                <ul class="space-y-3 font-mono text-xs text-gray-400">
+                    <li><a href="#" class="hover:text-white transition-colors">Services</a></li>
+                    <li><a href="#" onclick="document.getElementById('contact-section').scrollIntoView({behavior: 'smooth'})" class="hover:text-white transition-colors">Pricing</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Portfolio</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-mono text-axis-orange text-xs mb-4 uppercase tracking-wider">Client Access</h4>
+                <p class="text-xs text-gray-500 mb-4">Existing clients access your project files here.</p>
+                <a href="#portal-link" class="inline-block border border-white px-4 py-2 font-mono text-xs hover:bg-white hover:text-axis-charcoal transition-all">
+                    LOGIN TO PORTAL &rarr;
+                </a>
+            </div>
+        </div>
+        <div class="border-t border-gray-800 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center px-6 font-mono text-[10px] text-gray-500 gap-4">
+            <div>© 2024 AXIS3D.TECH // DUBLIN, IE</div>
+            <div class="flex gap-4">
+                <a href="#" class="hover:text-white">PRIVACY</a>
+                <a href="#" class="hover:text-white">TERMS</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Smooth Scroll
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            mouseMultiplier: 1,
+            touchMultiplier: 2,
+        })
+
+        function raf(time) {
+            lenis.raf(time)
+            requestAnimationFrame(raf)
+        }
+        requestAnimationFrame(raf)
+
+        // Three.js Scene Setup (V1 Geometry, V2 Colors/Performance)
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2(0xFFFFFF, 0.05); 
+        scene.background = new THREE.Color(0xFFFFFF);
+
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        container.appendChild(renderer.domElement);
+
+        // --- V1 GEOMETRY ---
+        const geometry = new THREE.IcosahedronGeometry(2, 1);
+        const wireframe = new THREE.WireframeGeometry(geometry);
+
+        const material = new THREE.LineBasicMaterial({ 
+            color: 0x1E2029, // Charcoal
+            linewidth: 1,
+            opacity: 0.15,
+            transparent: true
+        });
+
+        // Renamed to 'sphere' for consistency with V1's animation logic
+        const sphere = new THREE.LineSegments(wireframe, material); 
+        scene.add(sphere);
+
+        // Add floating particles
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particlesCount = 400; 
+        const posArray = new Float32Array(particlesCount * 3);
+
+        for(let i = 0; i < particlesCount * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 15;
+        }
+
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.03,
+            color: 0xFF4D00 // Axis Orange
+        });
+
+        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particlesMesh);
+
+        camera.position.z = 6;
+
+        // Interaction
+        let mouseX = 0;
+        let mouseY = 0;
+
+        if (window.matchMedia("(min-width: 768px)").matches) {
+            document.addEventListener('mousemove', (event) => {
+                mouseX = event.clientX / window.innerWidth - 0.5;
+                mouseY = event.clientY / window.innerHeight - 0.5;
+            });
+        }
+
+        const clock = new THREE.Clock();
+
+        function animate() {
+            requestAnimationFrame(animate);
+            const elapsedTime = clock.getElapsedTime();
+
+            // --- V1 ANIMATION LOGIC ---
+            sphere.rotation.y += 0.002;
+            sphere.rotation.x += 0.001;
+
+            // Interactive rotation based on mouse
+            sphere.rotation.y += mouseX * 0.05;
+            sphere.rotation.x += mouseY * 0.05;
+
+            particlesMesh.rotation.y = -elapsedTime * 0.05 + (mouseX * 0.2);
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // Robust Resize Handler
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // GSAP Animations
+        window.addEventListener('load', () => {
+            const tl = gsap.timeline();
+
+            tl.to("#loader", {
+                y: "-100%",
+                duration: 1,
+                ease: "power4.inOut",
+                delay: 1.0
+            })
+            .from("nav", { y: -100, opacity: 0, duration: 0.8 }, "-=0.5")
+            .from(".h1-responsive", { y: 50, opacity: 0, duration: 1, ease: "power3.out" }, "-=0.5");
+
+            // Scroll Triggers
+            gsap.utils.toArray('section').forEach(section => {
+                gsap.from(section, {
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top 85%", 
+                        toggleActions: "play none none reverse"
+                    },
+                    opacity: 0,
+                    y: 20,
+                    duration: 0.6
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
