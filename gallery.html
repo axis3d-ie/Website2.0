@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AXIS3D // Project Gallery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="assets/favicon/site.webmanifest">
+    <!-- Primary Meta Tags -->
+      <meta name="title" content="Axis3D — Precision 3D Printing Dublin | Custom Prints, Prototypes & Parts" />
+      <meta name="description" content="Professional 3D printing service in Dublin. Fast-turn prototypes, custom prints, and replacement parts in PLA & PETG. Industrial-grade quality, short lead times. Local pickup available." />
+      <meta name="keywords" content="3D printing Dublin, 3D printing Ireland, custom 3D prints, prototyping service, replacement parts, PLA printing, PETG printing, FDM printing, 3D printing service, rapid prototyping Dublin" />
+      <meta name="author" content="Axis3D" />
+      <meta name="robots" content="follow, gallery, index" />
+
+      <!-- Geographic Tags -->
+      <meta name="geo.region" content="IE-D" />
+      <meta name="geo.placename" content="Dublin" />
+      <meta name="geo.position" content="53.349805;-6.26031" />
+      <meta name="ICBM" content="53.349805, -6.26031" />
+
+      <!-- Open Graph / Facebook / LinkedIn -->
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content="https://axis3d.tech/" />
+      <meta property="og:title" content="Axis3D — Precision 3D Printing Dublin" />
+      <meta property="og:description" content="Professional 3D printing service in Dublin. Fast-turn prototypes, custom prints, and replacement parts in PLA & PETG. Industrial-grade quality, short lead times." />
+      <meta property="og:image" content="https://axis3d.tech/assets/favicon/logo.png" />
+      <meta property="og:site_name" content="Axis3D" />
+      <meta property="og:locale" content="en_IE" />
+
+      <!-- Twitter -->
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:url" content="https://axis3d.tech/" />
+      <meta name="twitter:title" content="Axis3D — Precision 3D Printing Dublin" />
+      <meta name="twitter:description" content="Professional 3D printing service in Dublin. Fast-turn prototypes, custom prints, and replacement parts in PLA & PETG." />
+      <meta name="twitter:image" content="https://axis3d.tech/assets/favion/logo.png" />
+
+      <!-- Additional Meta Tags -->
+      <meta name="theme-color" content="#1E2029" />
+      <link rel="canonical" href="https://axis3d.tech/" />
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        'axis-charcoal': '#1E2029',
+                        'axis-white': '#F5F5F7',
+                        'axis-orange': '#FF4D00', 
+                        'axis-light-grey': '#E0E0E0',
+                    },
+                }
+            }
+        }
+    </script>
+    <script src="assets/js/cookie.js"></script>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .gallery-grid-item:hover {
+            transform: translateY(-4px) scale(1.02);
+            opacity: 0.9;
+            cursor: pointer;
+        }
+        .lightbox-modal {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        /* Style for disabled buttons in lightbox */
+        .lightbox-nav-disabled {
+            opacity: 0.3;
+            cursor: default;
+        }
+    </style>
+</head>
+<body class="selection:bg-axis-orange selection:text-white">
+
+    <nav class="sticky top-0 w-full z-20 flex justify-between items-center p-4 md:p-6 bg-axis-white/95 backdrop-blur-sm border-b border-axis-charcoal">
+        <div class="text-axis-charcoal">
+            <h1 class="font-bold text-lg md:text-2xl tracking-tighter">AXIS<span class="text-axis-orange">3D</span></h1>
+        </div>
+        <div class="flex items-center gap-4">
+            <a href="index.html" class="font-mono text-xs md:text-sm text-axis-charcoal hover:text-axis-orange transition-colors">
+                &larr; HOME
+            </a>
+            <button onclick="document.getElementById('gallery-grid').scrollIntoView({behavior: 'smooth'})" class="bg-axis-charcoal text-white font-mono text-xs md:text-sm px-4 py-2 hover:bg-axis-orange transition-colors">
+                VIEW GALLERY
+            </button>
+        </div>
+    </nav>
+
+    <section class="py-16 md:py-24 px-4 md:px-12 bg-axis-light-grey border-b border-axis-charcoal text-axis-charcoal bg-tech-grid">
+        <h2 class="text-5xl md:text-7xl font-black tracking-tighter mb-4">PROJECT_GALLERY</h2>
+        <p class="font-mono text-lg md:text-xl max-w-2xl">
+            A selection of recent functional prototypes and aesthetic components manufactured using FDM in PLA and PETG.
+        </p>
+    </section>
+
+    <section id="gallery-grid" class="py-12 md:py-16 px-4 md:px-12">
+        <h3 class="font-mono text-xs uppercase tracking-widest text-axis-orange mb-8">COMPLETED BUILDS // CLICK TO ENLARGE</h3>
+        <div id="image-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+            </div>
+    </section>
+
+
+    <div id="lightbox-modal" class="lightbox-modal fixed inset-0 z-50 bg-axis-charcoal/95 backdrop-blur-md flex items-center justify-center p-4 md:p-8 opacity-0 invisible">
+
+        <button onclick="closeLightbox()" class="absolute top-4 right-4 md:top-6 md:right-6 text-white text-3xl hover:text-axis-orange transition-colors z-50">
+            &times;
+        </button>
+
+        <div class="w-full h-full max-w-6xl max-h-[90vh] flex flex-col md:flex-row bg-axis-white overflow-hidden shadow-2xl">
+
+            <div class="w-full md:w-3/4 h-1/2 md:h-full bg-axis-charcoal flex items-center justify-center relative overflow-hidden">
+                <img id="lightbox-image" src="" alt="Enlarged 3D Print" class="max-w-full max-h-full object-contain transition-transform duration-500">
+
+                <button id="prev-btn" onclick="navigateLightbox(-1)" class="absolute left-0 top-1/2 transform -translate-y-1/2 p-3 bg-axis-charcoal/50 text-white text-2xl hover:bg-axis-charcoal/80 transition-colors hidden md:block z-10">
+                    &#10094;
+                </button>
+                <button id="next-btn" onclick="navigateLightbox(1)" class="absolute right-0 top-1/2 transform -translate-y-1/2 p-3 bg-axis-charcoal/50 text-white text-2xl hover:bg-axis-charcoal/80 transition-colors hidden md:block z-10">
+                    &#10095;
+                </button>
+            </div>
+
+            <div class="w-full md:w-1/4 h-1/2 md:h-full p-6 md:p-8 flex flex-col justify-between text-axis-charcoal border-l border-axis-charcoal/20">
+                <div>
+                    <span class="font-mono text-xs uppercase text-axis-orange tracking-widest mb-2 block">PROJECT DETAILS</span>
+                    <h4 id="lightbox-title" class="text-3xl font-black mb-4"></h4>
+                    <p id="lightbox-description" class="text-sm mb-6"></p>
+
+                    <div class="space-y-3">
+                        <div class="font-mono text-sm border-b pb-1">
+                            <span class="text-gray-500">Material: </span><span id="lightbox-material" class="font-bold"></span>
+                        </div>
+                        <div class="font-mono text-sm border-b pb-1">
+                            <span class="text-gray-500">Function: </span><span id="lightbox-function" class="font-bold"></span>
+                        </div>
+                        <div class="font-mono text-sm border-b pb-1">
+                            <span class="text-gray-500">Resolution: </span><span id="lightbox-resolution" class="font-bold"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="index.html#contact-section" class="mt-8 font-mono text-xs bg-axis-orange text-white px-4 py-2 text-center hover:bg-axis-charcoal transition-colors">
+                    REQUEST A SIMILAR BUILD
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <footer class="bg-axis-charcoal text-white border-t border-gray-800 pt-12 md:pt-16 pb-6">
+        <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12 mb-12">
+            <div class="col-span-1 md:col-span-2">
+                <h2 class="text-2xl font-bold mb-4">AXIS3D</h2>
+                <p class="font-mono text-xs text-gray-400 max-w-sm leading-relaxed">
+                    Dublin-based additive manufacturing. Precision FDM printing in PLA & PETG.
+                </p>
+            </div>
+            <div>
+                <h4 class="font-mono text-axis-orange text-xs mb-4 uppercase tracking-wider">Navigation</h4>
+                <ul class="space-y-3 font-mono text-xs text-gray-400">
+                    <li><a href="#services" class="hover:text-white transition-colors">Services</a></li>
+                    <li><a href="#pricing"
+                            onclick="document.getElementById('contact-section').scrollIntoView({behavior: 'smooth'})"
+                            class="hover:text-white transition-colors">Pricing</a></li>
+                    <li><a href="gallery.html" class="hover:text-white transition-colors">Portfolio</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-mono text-axis-orange text-xs mb-4 uppercase tracking-wider">Socials</h4>
+                <p class="text-xs text-gray-500 mb-4">Stay up to date.</p>
+                <a href="https://www.instagram.com/axis3d.tech/"
+                    class="inline-block border border-white px-4 py-2 font-mono text-xs hover:bg-white hover:text-axis-charcoal transition-all">
+                    // Instagram &rarr;
+                </a>
+            </div>
+        </div>
+        <div
+            class="border-t border-gray-800 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center px-6 font-mono text-[10px] text-gray-500 gap-4">
+            <div>© AXIS3D.TECH // DUBLIN, IE</div>
+            <div class="flex gap-4">
+                <a href="admin.html" class="hover:text-white">STAFF</a>
+                <a href="/legal/privacy.html" class="hover:text-white">PRIVACY</a>
+                <a href="/legal/legal_index.html" class="hover:text-white">TERMS</a>
+                <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+        // --- 1. Gallery Data (UPDATED FOR MULTIPLE IMAGES) ---
+        // 'mainImageUrl' is for the grid thumbnail. 'imageUrls' is the array for the lightbox gallery.
+        const galleryItems = [
+            {
+                title: "AirSoft Accessories",
+                description: "Project involving over 18 parts. All the parts needed to be very acurate and robust to work together, we delivered all parts in under two weeks.",
+                material: "PETG Grey",
+                func: "Mechanical Component",
+                resolution: "0.28mm Layer",
+                mainImageUrl: "/gallery-photos/thumb/brl-front2-min.JPG", // Used for the grid
+                imageUrls: [ // Used for the lightbox
+                    "/gallery-photos/airsoft/brl-front2.JPG",
+                    "/gallery-photos/airsoft/brl-side.JPG",
+                    "/gallery-photos/airsoft/brl-front.JPG",
+                    "/gallery-photos/airsoft/brl-top.JPG"
+                ]
+            },
+            {
+                title: "Mini-Schnauzer",
+                description: "A simple model of a minature schnauzer with a loop on top to hang the decoration.",
+                material: "PETG White",
+                func: "Decorative Ornaments",
+                resolution: "0.28mm Layer",
+                mainImageUrl: "/gallery-photos/thumb/sch-front-min.JPG",
+                imageUrls: [
+                    "/gallery-photos/mini-sch/sch-front.JPG",
+                    "/gallery-photos/mini-sch/sch-top.JPG",
+                    "/gallery-photos/mini-sch/sch-top2.JPG"
+                ]
+            },
+            {
+                title: "Costume Mask",
+                description: "Made from two halves attached together this mask was delivered in under 2 days. The level of detail really made the mask come to life.",
+                material: "PETG White",
+                func: "Costume Prop",
+                resolution: "0.2mm Layer",
+                mainImageUrl: "/gallery-photos/thumb/mask-flat-min.jpg",
+                imageUrls: [
+                    "/gallery-photos/mask/mask-flat.jpg",
+                    "/gallery-photos/mask/mask-front.jpg",
+                    "/gallery-photos/mask/mask-close.jpg",
+                    "/gallery-photos/mask/mask-wall.JPG"
+                ]
+            },
+            {
+                title: "Printer",
+                description: "Photos of our printer.",
+                material: "PLA + PETG",
+                func: "",
+                resolution: "0.1mm - 2.8mm",
+                mainImageUrl: "/gallery-photos/other/printer.jpg",
+                imageUrls: [
+                    "/gallery-photos/other/printer.jpg",
+                    "/gallery-photos/other/prnt-disc.jpg"
+                ]
+            },
+            // ADD MORE PHOTOS HERE! Just duplicate the object above and change the values.
+        ];
+
+        const imageGrid = document.getElementById('image-grid');
+        const lightboxModal = document.getElementById('lightbox-modal');
+        const lightboxImage = document.getElementById('lightbox-image');
+        const lightboxTitle = document.getElementById('lightbox-title');
+        const lightboxDescription = document.getElementById('lightbox-description');
+        const lightboxMaterial = document.getElementById('lightbox-material');
+        const lightboxFunction = document.getElementById('lightbox-function');
+        const lightboxResolution = document.getElementById('lightbox-resolution');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+
+        let currentProjectIndex = 0; // Index of the project in galleryItems
+        let currentImageIndex = 0;   // Index of the image within the project's imageUrls
+
+        // --- 2. Render Gallery Grid ---
+        function renderGallery() {
+            imageGrid.innerHTML = galleryItems.map((item, index) => `
+                <div 
+                    class="gallery-grid-item rounded-sm overflow-hidden h-48 md:h-64 relative bg-axis-light-grey"
+                    onclick="openLightbox(${index})"
+                >
+                    <img 
+                        src="${item.mainImageUrl}" 
+                        alt="${item.title}" 
+                        class="w-full h-full object-cover"
+                        onerror="this.onerror=null; this.src='https://placehold.co/600x600/1E2029/FF4D00?text=AXIS3D+Image';"
+                    >
+                    <div class="absolute inset-0 bg-axis-charcoal/20 transition-opacity duration-300 opacity-0 hover:opacity-100 flex items-end p-3">
+                        <span class="font-mono text-xs text-white bg-axis-charcoal px-1">${item.material.toUpperCase()}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // --- 3. Lightbox Handlers (UPDATED) ---
+
+        // Function to update the image source and navigation buttons
+        function updateLightboxImage() {
+            const project = galleryItems[currentProjectIndex];
+            const imageUrl = project.imageUrls[currentImageIndex];
+
+            // Set image source
+            lightboxImage.src = imageUrl;
+            lightboxImage.alt = `${project.title} - Image ${currentImageIndex + 1} of ${project.imageUrls.length}`;
+
+            // Update navigation button visibility/style
+            if (project.imageUrls.length > 1) {
+                // Show buttons if more than one image
+                prevBtn.classList.remove('hidden');
+                nextBtn.classList.remove('hidden');
+
+                prevBtn.classList.toggle('lightbox-nav-disabled', currentImageIndex === 0);
+                nextBtn.classList.toggle('lightbox-nav-disabled', currentImageIndex === project.imageUrls.length - 1);
+            } else {
+                // Hide buttons if only one image
+                prevBtn.classList.add('hidden');
+                nextBtn.classList.add('hidden');
+            }
+        }
+
+        window.openLightbox = function(projectIndex) {
+            currentProjectIndex = projectIndex;
+            currentImageIndex = 0; // Always start with the first image in the array
+
+            const item = galleryItems[currentProjectIndex];
+
+            // Set metadata panel content
+            lightboxTitle.textContent = item.title;
+            lightboxDescription.textContent = item.description;
+            lightboxMaterial.textContent = item.material;
+            lightboxFunction.textContent = item.func;
+            lightboxResolution.textContent = item.resolution;
+
+            // Load the first image and set up navigation
+            updateLightboxImage();
+
+            // Show modal
+            lightboxModal.classList.remove('invisible', 'opacity-0');
+            lightboxModal.classList.add('visible', 'opacity-100');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        window.closeLightbox = function() {
+            // Hide modal
+            lightboxModal.classList.remove('visible', 'opacity-100');
+            lightboxModal.classList.add('invisible', 'opacity-0');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+
+        window.navigateLightbox = function(direction) {
+            const project = galleryItems[currentProjectIndex];
+            const newIndex = currentImageIndex + direction;
+
+            if (newIndex >= 0 && newIndex < project.imageUrls.length) {
+                currentImageIndex = newIndex;
+                updateLightboxImage();
+            }
+        }
+
+        // Close modal on escape key press
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightboxModal.classList.contains('visible')) {
+                closeLightbox();
+            }
+        });
+
+        // Add navigation via Arrow keys
+        document.addEventListener('keydown', (e) => {
+            if (lightboxModal.classList.contains('visible')) {
+                if (e.key === 'ArrowLeft') {
+                    navigateLightbox(-1);
+                } else if (e.key === 'ArrowRight') {
+                    navigateLightbox(1);
+                }
+            }
+        });
+
+        // Close modal when clicking outside the content area (on the overlay)
+        lightboxModal.addEventListener('click', (e) => {
+            if (e.target === lightboxModal) {
+                closeLightbox();
+            }
+        });
+
+
+        // --- 4. Initialization ---
+        document.addEventListener('DOMContentLoaded', renderGallery);
+    </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    <!-- Home Page -->
+    <url>
+        <loc>https://axis3d.tech/index.html</loc>
+        <lastmod>2025-11-27</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <!-- Gallery Page -->
+    <url>
+        <loc>https://axis3d.tech/gallery.html</loc>
+        <lastmod>2025-11-27</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Legal Index Page (Hub) -->
+    <url>
+        <loc>https://axis3d.tech/legal/legal_index.html</loc>
+        <lastmod>2025-11-27</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Policy Pages (using the policy template) -->
+    <url>
+        <loc>https://axis3d.tech/leagl/cookies.html</loc>
+        <lastmod>2025-11-27</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://axis3d.tech/lagal/privacy.html</loc>
+        <lastmod>2025-11-27</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://axis3d.tech/legal/returns.html</loc>
+        <lastmod>2025-11-27</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://axis3d.tech/legal/terms.html</loc>
+        <lastmod>2025-11-27</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://axis3d.tech/legal/uploads.html</loc>
+        <lastmod>2025-11-27</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+</urlset>

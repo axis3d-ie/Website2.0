@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RETURNS | AXIS3D Legal</title>
+    <!-- Load Inter and JetBrains Mono Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Load Tailwind CSS CDN and custom configuration -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        'axis-charcoal': '#1E2029',
+                        'axis-white': '#F5F5F7',
+                        'axis-orange': '#FF4D00', 
+                        'axis-light-grey': '#E0E0E0',
+                    },
+                }
+            }
+        }
+    </script>
+
+    <meta name="description" content="Official documentation for [Policy Name].">
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            background-color: #F5F5F7;
+            color: #1E2029;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        /* Style for policy content for better readability */
+        .policy-content h2 {
+            font-size: 1.75rem; /* 28px */
+            font-weight: 700;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #E0E0E0;
+            padding-bottom: 0.5rem;
+        }
+        .policy-content h3 {
+            font-size: 1.25rem; /* 20px */
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #FF4D00;
+        }
+        .policy-content p, .policy-content ul {
+            margin-bottom: 1rem;
+            line-height: 1.75;
+            text-align: justify;
+        }
+        .policy-content ul {
+            list-style: disc;
+            padding-left: 1.5rem;
+        }
+    </style>
+</head>
+<body class="selection:bg-axis-orange selection:text-white min-h-screen flex flex-col">
+
+    <!-- Navigation Header -->
+    <nav class="w-full z-20 flex justify-between items-center p-4 md:p-6 bg-axis-white/95 backdrop-blur-sm border-b border-axis-charcoal">
+        <div class="text-axis-charcoal">
+            <h1 class="font-bold text-lg md:text-2xl tracking-tighter">AXIS<span class="text-axis-orange">3D</span> // LEGAL</h1>
+        </div>
+        <a href="legal_index.html" class="bg-axis-charcoal text-white font-mono text-xs md:text-sm px-4 py-2 hover:bg-axis-orange transition-colors">
+            &larr; BACK TO INDEX
+        </a>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow container mx-auto px-4 md:px-6 py-12 md:py-20 max-w-5xl">
+        <!-- 1. EDIT THIS H2 HEADING -->
+        <h2 class="text-4xl md:text-6xl font-black tracking-tighter mb-4 text-axis-charcoal">Returns Policy</h2>
+        <p class="font-mono text-sm text-gray-500 mb-8">
+            Last Updated: <span class="text-axis-orange font-bold">November 27, 2025</span>
+        </p>
+
+        <!-- 2. EDIT THIS POLICY CONTENT AREA -->
+        <div class="policy-content text-gray-800">
+            <h2>1. Custom Products</h2>
+            <p>All Axis3D prints are made to customer specification. As such, they cannot usually be returned or refunded once produced unless defective.</p>
+
+            <h2>2. Refund Conditions</h2>
+            <p>If the print is defective or significantly differs from the approved design, we may offer a reprint or refund at our discretion.</p>
+
+            <h2>3. Process</h2>
+            <p>Contact <a href="mailto:info.axis3d@gmail.com">info.axis3d@gmail.com</a> within 7 days of delivery with photos and details. Return postage is at the customer’s expense unless the fault lies with us.</p>
+
+            <h2>4. Legal Basis</h2>
+            <p>This policy aligns with Irish consumer law but recognises exceptions for custom goods under EU directives.</p>
+
+            <h2>5. Contact Information</h2>
+            <p>For any questions or concerns regarding this policy, please contact our Legal Compliance team at:</p>
+            <p class="font-mono text-axis-orange mt-2">info.axis3d@gmail.com</p>
+
+        </div>
+        <!-- END OF POLICY CONTENT AREA -->
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-axis-charcoal text-white border-t border-gray-800 p-6 text-center font-mono text-xs">
+        © AXIS3D.TECH // Legal.
+    </footer>
+</body>
+</html>
