@@ -42,7 +42,7 @@
                     <h4 class="font-bold text-lg mb-1">Cookie Preferences</h4>
                     <p class="font-mono text-xs text-gray-400">
                         We use cookies for site functionality and analytics. Click 'Accept All' to agree or 'Manage Preferences' to choose your settings. 
-                        <a href="#cookie-policy-page" class="text-axis-orange underline hover:text-white transition-colors">Read our full policy.</a>
+                        <a href="/legal/cookies.html" class="text-axis-orange underline hover:text-white transition-colors">Read our full policy.</a>
                     </p>
                 </div>
 
