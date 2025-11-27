@@ -267,30 +267,30 @@
             </div>
 
         <!-- Right Actions -->
-        <div class="flex items-center gap-2 md:gap-4 z-50">
-            <!-- Portal Button (New) -->
-            <a href="orders.html"
-                class="hidden md:flex items-center gap-2 bg-white border border-axis-charcoal text-axis-charcoal px-4 py-2 hover:bg-axis-charcoal hover:text-white transition-colors group">
-                <div class="w-2 h-2 rounded-full bg-purple-500 animate-pulse"></div>
-                <span class="font-mono text-xs font-bold tracking-wider">CLIENT_PORTAL</span>
-            </a>
+        <div class="flex flex-col items-end gap-2 z-50">
+            <div class="flex items-center gap-2 md:gap-4">
+                <a href="orders.html"
+                    class="hidden md:flex items-center gap-2 bg-white border border-axis-charcoal text-axis-charcoal px-4 py-2 hover:bg-axis-charcoal hover:text-white transition-colors group">
+                    <div class="w-2 h-2 rounded-full bg-purple-500 animate-pulse"></div>
+                    <span class="font-mono text-xs font-bold tracking-wider">CLIENT_PORTAL</span>
+                </a>
 
-            <!-- Mobile Portal Icon -->
-            <a href="#portal-link-goes-here"
-                class="md:hidden flex items-center justify-center w-10 h-10 bg-white border border-axis-charcoal text-axis-charcoal">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="w-5 h-5">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                </svg>
-            </a>
+                <a href="#portal-link-goes-here"
+                    class="md:hidden flex items-center justify-center w-10 h-10 bg-white border border-axis-charcoal text-axis-charcoal">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                    </svg>
+                </a>
 
-            <!-- Quote Button -->
-            <button onclick="document.getElementById('contact-section').scrollIntoView({behavior: 'smooth'})"
-                class="bg-axis-orange text-white font-mono text-xs md:text-sm px-4 py-2 md:px-6 md:py-2 hover:bg-white hover:text-axis-orange transition-colors border border-transparent font-bold shadow-lg uppercase">
-                [ Get Quote ]
-            </button>
-            <div class="font-mono text-[10px] text-right mt-2">
+                <button onclick="document.getElementById('contact-section').scrollIntoView({behavior: 'smooth'})"
+                    class="bg-axis-orange text-white font-mono text-xs md:text-sm px-4 py-2 md:px-6 md:py-2 hover:bg-white hover:text-axis-orange transition-colors border border-transparent font-bold shadow-lg uppercase">
+                    [ Get Quote ]
+                </button>
+            </div>
+
+            <div class="font-mono text-[10px] text-right">
                 SYS.STATUS: ONLINE<br>
                 V.2.0.24
             </div>
