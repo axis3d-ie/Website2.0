@@ -27,13 +27,13 @@
 
     <!-- Policy Pages (using the policy template) -->
     <url>
-        <loc>https://axis3d.tech/leagl/cookies.html</loc>
+        <loc>https://axis3d.tech/legal/cookies.html</loc>
         <lastmod>2025-11-27</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
-        <loc>https://axis3d.tech/lagal/privacy.html</loc>
+        <loc>https://axis3d.tech/legal/privacy.html</loc>
         <lastmod>2025-11-27</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.6</priority>
